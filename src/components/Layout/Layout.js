@@ -6,7 +6,7 @@ const Layoult = (props) => {
   return (
     <>
       <Sidebar />
-      <div>{children}</div>
+      <div >{children}</div>
     </>
   )
 }

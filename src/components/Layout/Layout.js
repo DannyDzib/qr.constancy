@@ -1,12 +1,13 @@
 import * as React from "react"
 import Sidebar from "../Sidebar"
+import Page from "components/Page"
 
 const Layoult = (props) => {
   const { children } = props
   return (
     <>
       <Sidebar />
-      <div >{children}</div>
+      <Page >{children}</Page>
     </>
   )
 }

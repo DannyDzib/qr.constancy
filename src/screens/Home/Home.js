@@ -1,8 +1,10 @@
-import * as React from 'react'
+import * as React from "react"
 const Home = () => {
-    return (
-        <p>Hola</p>
-      );
+  return (
+    <>
+      <p>Hola</p>
+    </>
+  )
 }
- 
-export default Home;
+
+export default Home

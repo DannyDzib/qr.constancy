@@ -1,7 +1,7 @@
-import * as React from 'react'
-import Tucan from 'assets/tucan.png'
-import { Controller } from 'react-hook-form'
-import useLogin from './useLogin'
+import * as React from "react"
+import Tucan from "assets/images/tucan.png"
+import { Controller } from "react-hook-form"
+import useLogin from "./useLogin"
 
 const Login = () => {
   const { control, formState, handleSubmit } = useLogin()
@@ -10,12 +10,10 @@ const Login = () => {
     <div className="min-h-full flex items-center justify-center h-screen  py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-xs w-full space-y-8">
         <div>
-          <img
-            className="mx-auto h-28 w-auto"
-            src={Tucan}
-            alt="Workflow"
-          />
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">Iniciar sesión</h2>
+          <img className="mx-auto h-28 w-auto" src={Tucan} alt="Workflow" />
+          <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
+            Iniciar sesión
+          </h2>
         </div>
         <div className="mt-8 space-y-6">
           <input type="hidden" name="remember" defaultValue="true" />
@@ -53,24 +51,27 @@ const Login = () => {
               />
             </div>
           </div>
-
           <div className="flex items-center flex-end">
             <div className="text-sm">
               <a
                 href="/login"
-                className="font-medium text-indigo-600 hover:text-indigo-500">
+                className="font-medium text-indigo-600 hover:text-indigo-500"
+              >
                 ¿Olvidaste tu contraseña?
               </a>
             </div>
           </div>
           <div>
             <button
-              className={`${formState.isValid ? 'bg-indigo-600 hover:bg-indigo-700 ' : 'bg-gray-400'} text-white group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
+              className={`${
+                formState.isValid
+                  ? "bg-indigo-600 hover:bg-indigo-700 "
+                  : "bg-gray-400"
+              } text-white group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               onClick={handleSubmit}
               disabled={!formState.isValid}
             >
-              <span className="absolute left-0 inset-y-0 flex items-center pl-3">
-              </span>
+              <span className="absolute left-0 inset-y-0 flex items-center pl-3"></span>
               Sign in
             </button>
           </div>

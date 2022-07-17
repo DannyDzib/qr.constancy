@@ -6,19 +6,6 @@ const initialState = {
   financingLinkClicks: 0,
   selectedIndexVDPMenu: 0,
   zipcode: '',
-  confirmationType:
-    typeof window !== 'undefined'
-      ? window.sessionStorage.getItem('confirmationType')
-      : '',
-  priceRating:
-    typeof window !== 'undefined'
-      ? JSON.parse(window.sessionStorage.getItem('priceRating'))
-      : false,
-  hideVdpModal:
-    typeof window !== 'undefined'
-      ? JSON.parse(window.sessionStorage.getItem('vdpModal'))
-      : null,
-  promoCode: '',
   urlToBack: HOME_URL,
 }
 

@@ -5,10 +5,10 @@ import Page from "components/Page"
 const Layoult = (props) => {
   const { children } = props
   return (
-    <>
+    <div className="flex">
       <Sidebar />
       <Page >{children}</Page>
-    </>
+    </div>
   )
 }
 

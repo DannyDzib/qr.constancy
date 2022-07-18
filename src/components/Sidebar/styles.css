@@ -1,0 +1,19 @@
+.sidebar::-webkit-scrollbar {
+    width: 5px;
+    z-index: 0!important;
+
+  }
+  
+  /* Track */
+  .sidebar::-webkit-scrollbar-track {
+    border-radius: 10px;
+    z-index: 0!important;
+  }
+   
+  /* Handle */
+  .sidebar::-webkit-scrollbar-thumb {
+    background:#aeaebd; 
+    border-radius: 10px;
+    z-index: 0!important;
+  }
+  

@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export function useAuth() {
-  const [authed, setAuthed] = React.useState(true);
+  const [authed, setAuthed] = React.useState(false);
 
   return {
     authed,

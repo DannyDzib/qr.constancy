@@ -1,22 +1,80 @@
-import { useState } from "react"
+import { Fragment, useState } from "react"
 import ControlIcon from "assets/icons/control.png"
 import UserIcon from "assets/images/avatar.jpg"
 import LogoutImage from "assets/icons/logout.svg"
 import TucanImage from "assets/images/tucan.png"
-import { sidebarItems } from "./constats"
+import { Link } from "react-router-dom"
+import "./styles.css"
+import useSidebar from "./useSidebar"
+import { useIntl } from "react-intl"
+
 const Sidebar = () => {
+  const { formatMessage: f } = useIntl()
   const [open, setOpen] = useState(true)
+  const { sidebarItems } = useSidebar()
+
+  const renderItem = (item, key) => (
+    <div
+      key={key}
+      className={`${!open && "hidden"} ${
+        key === 0 ? "mt-2 " : "mt-5"
+      } origin-left  duration-200 items-start text-sm font-semibold italic flex `}
+    >
+      <img className=" w-[25px]" alt="user" src={item.icon} />
+      <div className=" ml-4 italic">
+        {item?.subItems ? (
+          <p>{item.title}</p>
+        ) : (
+          <Link to="/">{item.title}</Link>
+        )}
+        {item?.subItems &&
+          item?.subItems?.map((subItem, i) => (
+            <Link
+              key={i}
+              to="/"
+              className={`mt-2 text-sm ml-4 font-light italic block`}
+            >
+              {subItem.title}
+            </Link>
+          ))}
+      </div>
+    </div>
+  )
+
+  const renderList = (menu, index) => (
+    <Fragment key={index}>
+      <li className={` flex text-sm mt-4 ${open ? "ml-0" : "ml-2"}`}>
+        {!open && (
+          <img
+            className="object-cover w-[25px] text-blue-900"
+            alt="user"
+            src={menu.icon}
+          />
+        )}
+        <p className="text-gray-500 italic">{open && menu.title}</p>
+      </li>
+      <li
+        className={`flex flex-col  rounded-md py-1  hover:bg-light-white text-sm items-start gap-x-4 
+       ${index === 0 && "bg-light-white"} `}
+      >
+        {menu.items.map((item, key) => renderItem(item, key))}
+      </li>
+      {sidebarItems.length !== index + 1 && (
+        <div className="border-b-2 border-gray-300 mt-4" />
+      )}
+    </Fragment>
+  )
 
   return (
     <div
       className={` ${
         open ? "w-72" : "w-20 "
-      } bg-gray-200 h-screen p-5   relative duration-300 text-blue-900 static`}
+      } bg-gray-200  p-5  relative duration-300 text-blue-900 static h-screen overflow-y-auto overflow-x-hidden sidebar`}
     >
       <img
         src={ControlIcon}
         className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 rounded-full  ${!open && "rotate-180"}`}
+           border-2 rounded-full z-50	  ${!open && "rotate-180"}`}
         onClick={() => setOpen(!open)}
         alt="icon"
       />
@@ -33,7 +91,7 @@ const Sidebar = () => {
             !open && "scale-0"
           }`}
         >
-          TecNM Cancun
+          {f({ id: "SIDEBAR_TITLE" })}
         </h1>
       </div>
       {!open && <div className="border-b-2 border-gray-300 mb-4 mt-2" />}
@@ -54,8 +112,11 @@ const Sidebar = () => {
         </li>
         {open && (
           <li className="flex justify-end underline-offset-1	mr-5">
-            <a href="/" className="text-gray-500 text-sm flex items-center font-semibold ">
-              <span>Salir</span>
+            <Link
+              to="/login"
+              className="text-gray-500 text-sm flex items-center font-semibold "
+            >
+              <span>{f({ id: "SIDEBAR_EXIT" })}</span>
               <div className=" rounded-full bg-white w-[28px] p-2 radius ml-1">
                 <img
                   className=" rotate-180 w-full"
@@ -63,60 +124,18 @@ const Sidebar = () => {
                   src={LogoutImage}
                 />
               </div>
-            </a>
+            </Link>
           </li>
         )}
         <div className="border-b-2 border-gray-300 mt-4" />
-        {sidebarItems.map((menu, index) => (
-          <>
-            <li className={` flex text-sm mt-4 ${open ? "ml-0" : "ml-2"}`}>
-              {!open && (
-                <img
-                  className="object-cover w-[25px] text-blue-900"
-                  alt="user"
-                  src={menu.icon}
-                />
-              )}
-              <p className="text-gray-500 italic">{open && menu.title}</p>
-            </li>
-            <li
-              key={index}
-              className={`flex flex-col  rounded-md py-1  hover:bg-light-white text-sm items-start gap-x-4 
-               ${index === 0 && "bg-light-white"} `}
-            >
-              {menu.items.map((item, key) => (
-                <div
-                  key={key}
-                  className={`${!open && "hidden"} ${
-                    key === 0 ? "mt-2 " : "mt-5"
-                  } origin-left duration-200  text-sm font-semibold italic flex`}
-                >
-                  <img
-                    className="object-cover w-[25px]"
-                    alt="user"
-                    fill="#000"
-                    src={item.icon}
-                  />
-                  <div className="text-sm ml-4 font-semibold italic">
-                    <p>{item.title}</p>
-                  </div>
-                </div>
-              ))}
-            </li>
-            {sidebarItems.length !== index + 1 && (
-              <div className="border-b-2 border-gray-300 mt-4" />
-            )}
-          </>
-        ))}
+        {sidebarItems?.map((menu, index) => renderList(menu, index))}
+        {!open && <div className="border-b-2 border-gray-300 mt-4" />}
         {!open && (
-          <>
-            <div className="border-b-2 border-gray-300 mt-4" />
-            <li className="min-h-fit mt-4 flex items-center justify-end absolute bottom-5 right-6">
-              <button className=" border-2 border-white rounded-full bg-white w-[35px] p-2 radius rotate-180">
-                <img className="object-cover " alt="logout" src={LogoutImage} />
-              </button>
-            </li>
-          </>
+          <li className="min-h-fit mt-4 flex items-center justify-end absolute bottom-5 right-6">
+            <button className=" border-2 border-white rounded-full bg-white w-[35px] p-2 radius rotate-180">
+              <img className="object-cover " alt="logout" src={LogoutImage} />
+            </button>
+          </li>
         )}
       </ul>
     </div>

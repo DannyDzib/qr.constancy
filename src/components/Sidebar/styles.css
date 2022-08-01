@@ -12,8 +12,7 @@
    
   /* Handle */
   .sidebar::-webkit-scrollbar-thumb {
-    background:#aeaebd; 
-    border-radius: 10px;
+    background: #e0cbcb;
+    border-radius: 100vh;
     z-index: 0!important;
-  }
-  
+}

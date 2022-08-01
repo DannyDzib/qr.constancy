@@ -4,9 +4,9 @@ import UserIcon from "assets/images/avatar.jpg"
 import LogoutImage from "assets/icons/logout.svg"
 import TucanImage from "assets/images/tucan.png"
 import { Link } from "react-router-dom"
-import "./styles.css"
 import useSidebar from "./useSidebar"
 import { useIntl } from "react-intl"
+import "./styles.css"
 
 const Sidebar = () => {
   const { formatMessage: f } = useIntl()
@@ -17,11 +17,11 @@ const Sidebar = () => {
     <div
       key={key}
       className={`${!open && "hidden"} ${
-        key === 0 ? "mt-2 " : "mt-5"
-      } origin-left  duration-200 items-start text-sm font-semibold italic flex `}
+        key === 0 ? "mt-1 " : "mt-3"
+      } origin-left  duration-200 items-start text-sm font-semibold italic flex`}
     >
-      <img className=" w-[25px]" alt="user" src={item.icon} />
-      <div className=" ml-4 italic">
+      <img className=" w-[15px]" alt="user" src={item.icon} />
+      <div className="mx-4 italic">
         {item?.subItems ? (
           <p>{item.title}</p>
         ) : (
@@ -32,7 +32,7 @@ const Sidebar = () => {
             <Link
               key={i}
               to="/"
-              className={`mt-2 text-sm ml-4 font-light italic block`}
+              className={`mt-1 ml-4 font-light italic block`}
             >
               {subItem.title}
             </Link>
@@ -43,7 +43,7 @@ const Sidebar = () => {
 
   const renderList = (menu, index) => (
     <Fragment key={index}>
-      <li className={` flex text-sm mt-4 ${open ? "ml-0" : "ml-2"}`}>
+      <li className={`flex text-xs ${open ? "ml-0" : "ml-2"}`}>
         {!open && (
           <img
             className="object-cover w-[25px] text-blue-900"
@@ -60,23 +60,24 @@ const Sidebar = () => {
         {menu.items.map((item, key) => renderItem(item, key))}
       </li>
       {sidebarItems.length !== index + 1 && (
-        <div className="border-b-2 border-gray-300 mt-4" />
+        <div className="border-b border-gray-300 my-4" />
       )}
     </Fragment>
   )
 
   return (
     <div
-      className={` ${
-        open ? "w-72" : "w-20 "
-      } bg-gray-200  p-5  relative duration-300 text-blue-900 static h-screen overflow-y-auto overflow-x-hidden sidebar`}
+      className={`${
+        open ? "w-72" : "w-20"
+      } bg-gray-200 p-5 relative duration-300 overflow-y-auto overflow-x-hidden sidebar`}
     >
       <img
         src={ControlIcon}
-        className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple
-           border-2 rounded-full z-50	  ${!open && "rotate-180"}`}
+        className={`absolute cursor-pointer -right-3 top-9 w-7 border-dark-purple border-2 rounded-full ${
+          !open && "rotate-180"
+        }`}
         onClick={() => setOpen(!open)}
-        alt="icon"
+        alt="sidebar open close"
       />
       <div className="flex items-center">
         {!open && (
@@ -87,7 +88,7 @@ const Sidebar = () => {
           />
         )}
         <h1
-          className={` text-center	w-full origin-left font-bold italic text-xl duration-200 ${
+          className={`text-center w-full origin-left font-bold italic text-xl duration-200 ${
             !open && "scale-0"
           }`}
         >
@@ -97,7 +98,7 @@ const Sidebar = () => {
       {!open && <div className="border-b-2 border-gray-300 mb-4 mt-2" />}
       <ul className="pt-1">
         <li
-          className={` flex items-center text-sm   ${
+          className={`flex items-center text-sm ${
             open ? "justify-start" : "justify-center"
           }`}
         >
@@ -107,36 +108,21 @@ const Sidebar = () => {
             src={UserIcon}
           />
           {open && (
-            <p className="text-gray-500 ml-2 ">Alejandro de la cruz perez </p>
+            <p className="text-gray-500 mx-2">Alejandro de la cruz perez </p>
           )}
         </li>
-        {open && (
-          <li className="flex justify-end underline-offset-1	mr-5">
-            <Link
-              to="/login"
-              className="text-gray-500 text-sm flex items-center font-semibold "
-            >
-              <span>{f({ id: "SIDEBAR_EXIT" })}</span>
-              <div className=" rounded-full bg-white w-[28px] p-2 radius ml-1">
-                <img
-                  className=" rotate-180 w-full"
-                  alt="logout"
-                  src={LogoutImage}
-                />
-              </div>
-            </Link>
-          </li>
-        )}
-        <div className="border-b-2 border-gray-300 mt-4" />
+        <div className="border-b border-gray-300 my-3" />
         {sidebarItems?.map((menu, index) => renderList(menu, index))}
-        {!open && <div className="border-b-2 border-gray-300 mt-4" />}
-        {!open && (
-          <li className="min-h-fit mt-4 flex items-center justify-end absolute bottom-5 right-6">
-            <button className=" border-2 border-white rounded-full bg-white w-[35px] p-2 radius rotate-180">
-              <img className="object-cover " alt="logout" src={LogoutImage} />
-            </button>
-          </li>
-        )}
+        {!open && <div className="border-b border-gray-300 mt-4" />}
+        <li
+          className={`flex ${
+            open ? "justify-end" : "justify-center"
+          }  mt-4 static bottom-5 right-5 lg:absolute lg:block `}
+        >
+          <button className=" border-2 border-white rounded-full bg-white w-[35px] p-2 radius rotate-180">
+            <img className="object-cover " alt="logout" src={LogoutImage} />
+          </button>
+        </li>
       </ul>
     </div>
   )

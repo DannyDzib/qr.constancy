@@ -8,6 +8,8 @@ import { IntlProvider } from "react-intl"
 import useMessages from "hooks/useMessages"
 import { store } from "redux/store"
 import { Provider } from "react-redux"
+import { Modal, ModalProvider } from "components/Modal"
+import { Toast, ToastProvider } from "components/Toast"
 function App() {
   const queryClient = new QueryClient()
   const { messages } = useMessages()
@@ -18,19 +20,25 @@ function App() {
           locale={window.navigator.language || "es"}
           messages={messages}
         >
-          <BrowserRouter>
-            <Routes>
-              {routes.map((route, index) => (
-                <Route
-                  key={index}
-                  path={route.path}
-                  element={<AuthGuard component={route.element} />}
-                />
-              ))}
-              <Route path="/login" element={<Login />} />
-              <Route path="*" element={<Navigate to="/login" />} />
-            </Routes>
-          </BrowserRouter>
+          <ToastProvider>
+            <ModalProvider>
+              <Toast />
+              <Modal />
+              <BrowserRouter>
+                <Routes>
+                  {routes.map((route, index) => (
+                    <Route
+                      key={index}
+                      path={route.path}
+                      element={<AuthGuard component={route.element} />}
+                    />
+                  ))}
+                  <Route path="/login" element={<Login />} />
+                  <Route path="*" element={<Navigate to="/login" />} />
+                </Routes>
+              </BrowserRouter>
+            </ModalProvider>
+          </ToastProvider>
         </IntlProvider>
         {/* <ReactQueryDevtools initialIsOpen={false} /> */}
       </QueryClientProvider>

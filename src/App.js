@@ -2,7 +2,8 @@ import { QueryClient, QueryClientProvider } from "react-query"
 import { ReactQueryDevtools } from "react-query/devtools"
 import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom"
 import routes from "navigation/routes"
-import Login from "screens/Login"
+import Login from "screens/Home/Login"
+import Loading from "components/Loading"
 import AuthGuard from "components/AuthGuard"
 import { IntlProvider } from "react-intl"
 import useMessages from "hooks/useMessages"
@@ -17,9 +18,10 @@ function App() {
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
         <IntlProvider
-          locale={window.navigator.language || "es"}
+          locale={"es"}
           messages={messages}
         >
+          <Loading />
           <ToastProvider>
             <ModalProvider>
               <Toast />

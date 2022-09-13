@@ -2,7 +2,7 @@ export const DevEnviroment = {
   production: false,
   apiUrl: process.env.REACT_APP_PUBLIC_API,
   endpointUnauthorized: {
-    getToken: 'api/auth/login'
+    getToken: 'auth/login'
   },
   endpoint: {
   },

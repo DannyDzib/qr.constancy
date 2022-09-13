@@ -1,28 +1,28 @@
-const axios = require('axios');
+const axios = require("axios")
 
-export default class HttpClient {
-  toQueryString = json => {
+class HttpClient {
+  toQueryString = (json) => {
     return (
-      '?' +
+      "?" +
       Object.keys(json)
-        .map(function(key) {
-          let objectType;
-          if (typeof json[key] === 'object') {
-            objectType = JSON.stringify(json[key]);
+        .map(function (key) {
+          let objectType
+          if (typeof json[key] === "object") {
+            objectType = JSON.stringify(json[key])
           } else {
-            objectType = encodeURIComponent(json[key]);
+            objectType = encodeURIComponent(json[key])
           }
-          let r = encodeURIComponent(key) + '=' + objectType;
-          return r;
+          let r = encodeURIComponent(key) + "=" + objectType
+          return r
         })
-        .join('&')
-    );
-  };
+        .join("&")
+    )
+  }
   defaultHeaders = () => {
     return {
-      'content-type': 'application/json'
-    };
-  };
+      "content-type": "application/json",
+    }
+  }
 
   /**
    * Consulta Http por metodo GET.
@@ -32,10 +32,10 @@ export default class HttpClient {
    */
 
   get = async (url, request) => {
-    const query = this.toQueryString(request);
-    const response = await axios.get(`${url}${query}`);
-    return response;
-  };
+    const query = this.toQueryString(request)
+    const response = await axios.get(`${url}${query}`)
+    return response
+  }
 
   /**
    * Consulta Http por metodo POST.
@@ -45,23 +45,25 @@ export default class HttpClient {
    * @param customHeaders Headers custom a la request
    */
 
-  post = async (url, request, customHeaders = {}) => {
-    const headers = customHeaders ? customHeaders : this.defaultHeaders();
+  post = async (url, request, customHeaders) => {
+    const headers = customHeaders || this.defaultHeaders()
     const options = {
-      method: 'POST',
+      method: "POST",
       headers,
       data: request,
-      url
-    };
-    return await axios(options);
-  };
+      url,
+    }
+    return await axios(options)
+  }
   patch = async (url, request) => {
-    const response = axios.patch(url, request);
-    return await response;
-  };
+    const response = axios.patch(url, request)
+    return await response
+  }
 
   delete = async (url) => {
-    const response = axios.delete(url);
-    return await response;
-  };
+    const response = axios.delete(url)
+    return await response
+  }
 }
+
+export default new HttpClient()

@@ -5,8 +5,12 @@ import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 import { login } from "redux/modules/auth"
+import { setLoading } from "redux/modules/common"
+import { useMutation } from "react-query"
+import { handleLogin } from "clients/httpLogin"
 
 const useLogin = () => {
+  const { mutate, data, error, isLoading } = useMutation(handleLogin)
   const { isAuth } = useSelector((state) => state.auth)
   const navigate = useNavigate()
   const dispatch = useDispatch()
@@ -40,9 +44,13 @@ const useLogin = () => {
   })
 
   const handleSubmit = () => {
+    // dispatch(setLoading(true))
     const values = getValues()
-    console.log(values)
-    dispatch(login())
+    mutate(values)
+    /* setTimeout(() => {
+      dispatch(setLoading(false))
+      dispatch(login())
+    }, 5000) */
   }
 
   return {

@@ -1,47 +1,18 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createSlice } from "@reduxjs/toolkit"
 
-const HOME_URL = '/'
 const initialState = {
-  sellYourCarFormOpen: false,
-  financingLinkClicks: 0,
-  selectedIndexVDPMenu: 0,
-  zipcode: '',
-  urlToBack: HOME_URL,
+  isLoading: false,
 }
 
 const commonSlice = createSlice({
-  name: 'common',
+  name: "common",
   initialState,
   reducers: {
-    toggleSellYourCarForm: (state) => {
-      state.sellYourCarFormOpen = !state.sellYourCarFormOpen
-    },
-
-    setValue: (state, action) => {
-      const { key, value, persist } = action.payload
-      if (persist) {
-        window.sessionStorage.setItem(
-          key,
-          typeof value === 'object' ? JSON.stringify(value) : String(value),
-        )
-      }
-      state[key] = value
-    },
-
-    IncrementFinancingClicks: (state) => {
-      state.financingLinkClicks += 1
-    },
-    resetUrlToBack: (state) => {
-      state.urlToBack = HOME_URL
+    setLoading: (state, action) => {
+      state.isLoading = action.payload
     },
   },
 })
 
 export default commonSlice.reducer
-export const {
-  toggleSellYourCarForm,
-  setValue,
-  IncrementFinancingClicks,
-  togglelVdpModal,
-  resetUrlToBack,
-} = commonSlice.actions
+export const { setLoading } = commonSlice.actions

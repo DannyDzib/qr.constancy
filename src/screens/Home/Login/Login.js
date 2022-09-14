@@ -8,7 +8,7 @@ const Login = () => {
   const { formatMessage: f } = useIntl()
   const { control, formState, handleSubmit } = useLogin()
 
-  return (
+  return  (
     <div className="min-h-full flex items-center justify-center h-screen  py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-xs w-full space-y-8">
         <div>
@@ -67,7 +67,7 @@ const Login = () => {
             <button
               className={`${
                 formState.isValid
-                  ? "bg-indigo-600 hover:bg-indigo-700 "
+                  ? "bg-blue-900 hover:bg-blue-800 "
                   : "bg-gray-400"
               } text-white group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500`}
               onClick={handleSubmit}

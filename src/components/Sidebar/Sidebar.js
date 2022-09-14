@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react"
+import { Fragment, memo, useState } from "react"
 import ControlIcon from "assets/icons/control.png"
 import UserIcon from "assets/images/avatar.jpg"
 import LogoutImage from "assets/icons/logout.svg"
@@ -19,6 +19,7 @@ const Sidebar = () => {
   const { handleOpenModal, handleCloseModal } = useModal()
   const { onLogout } = useAuth()
   const dispatch = useDispatch()
+
   const handleLogout = () => {
     dispatch(setLoading(true))
     handleCloseModal()
@@ -74,7 +75,7 @@ const Sidebar = () => {
           item?.subItems?.map((subItem, i) => (
             <Link
               key={i}
-              to="/"
+              to={subItem.path}
               className={`mt-1 ml-4 font-light italic block`}
             >
               {subItem.title}
@@ -174,4 +175,4 @@ const Sidebar = () => {
   )
 }
 
-export default Sidebar
+export default memo(Sidebar)

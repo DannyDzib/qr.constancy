@@ -54,3 +54,11 @@ export const toastIcons = {
     </div>
   ),
 }
+
+
+
+export const paths = {
+  admin:{
+    users: "/admin/users",
+  }
+}

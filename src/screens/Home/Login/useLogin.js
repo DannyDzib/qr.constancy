@@ -1,23 +1,23 @@
 import { useForm, useWatch } from "react-hook-form"
 import { yupResolver } from "@hookform/resolvers/yup"
 import * as Yup from "yup"
-import { useDispatch, useSelector } from "react-redux"
 import { useEffect } from "react"
-import { useNavigate } from "react-router-dom"
-import { login } from "redux/modules/auth"
+import { useNavigate, useLocation } from "react-router-dom"
 import { setLoading } from "redux/modules/common"
 import { useMutation } from "react-query"
 import { handleLogin } from "clients/httpLogin"
+import localstorage from "services/localstorage"
+import { useAuth } from "hooks/useAuth"
+import { useDispatch } from "react-redux"
+import { useToast } from "components/Toast"
 
 const useLogin = () => {
-  const { mutate, data, error, isLoading } = useMutation(handleLogin)
-  const { isAuth } = useSelector((state) => state.auth)
+  const { mutate, data, isLoading } = useMutation(handleLogin)
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (isAuth) navigate("/")
-  }, [isAuth])
+  const location = useLocation()
+  const { isAuth } = useAuth()
+  const toast = useToast()
 
   const { control, formState, getValues } = useForm({
     resolver: yupResolver(
@@ -33,8 +33,8 @@ const useLogin = () => {
       })
     ),
     defaultValues: {
-      email: "",
-      password: "",
+      email: "l16530486@cancun.tecnm.mx",
+      password: "pruebas2022",
     },
     mode: "onChange",
   })
@@ -44,14 +44,29 @@ const useLogin = () => {
   })
 
   const handleSubmit = () => {
-    // dispatch(setLoading(true))
     const values = getValues()
     mutate(values)
-    /* setTimeout(() => {
-      dispatch(setLoading(false))
-      dispatch(login())
-    }, 5000) */
   }
+
+  useEffect(() => {
+    if (isAuth) navigate(location?.state?.path || "/")
+  }, [isAuth])
+
+  useEffect(() => {
+    dispatch(setLoading(isLoading))
+  }, [isLoading])
+
+  useEffect(() => {
+    if (data) {
+      toast.show({
+        type: data.status,
+        text: data.message || `Bienvenido \n ${data.userName}`,
+      })
+    }
+    if (data?.token && data?.userName && data?.status && !isLoading) {
+      localstorage.set("data", data)
+    }
+  }, [data])
 
   return {
     control,

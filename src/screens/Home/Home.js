@@ -3,7 +3,7 @@ import { useToast } from "components/Toast"
 import * as React from "react"
 const Home = () => {
   const { handleOpenModal } = useModal()
-  const { success, error, alert } = useToast()
+  const toast = useToast()
 
   const handleShowModal = () => {
     handleOpenModal({
@@ -31,20 +31,20 @@ const Home = () => {
       <p
         className="cursor-pointer"
         onClick={() =>
-          success.show({ text: "Servicio consumido correctamente", time: 1000 })
+          toast.show({type:'success', text: "Servicio consumido correctamente", time: 1000 })
         }
       >
         Hola
       </p>
       <p
         className="cursor-pointer"
-        onClick={() => alert.show({ text: "Servicio consumido correctamente" })}
+        onClick={() => toast.show({type:'alert', text: "Servicio consumido correctamente" })}
       >
         Hola
       </p>
       <p
         className="cursor-pointer"
-        onClick={() => error.show({ text: "Servicio consumido correctamente" })}
+        onClick={() => toast.show({type:'error', text: "Servicio consumido correctamente" })}
       >
         Hola
       </p>

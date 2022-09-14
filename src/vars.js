@@ -1,9 +1,9 @@
 export const toastIcons = {
   success: (
-    <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
+    <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-green-500 bg-green-100 rounded-lg dark:bg-green-800 dark:text-green-200">
       <svg
         aria-hidden="true"
-        class="w-5 h-5"
+        className="w-5 h-5"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -14,14 +14,14 @@ export const toastIcons = {
           clipRule="evenodd"
         ></path>
       </svg>
-      <span class="sr-only">Check icon</span>
+      <span className="sr-only">Check icon</span>
     </div>
   ),
   error: (
-    <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
+    <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-red-500 bg-red-100 rounded-lg dark:bg-red-800 dark:text-red-200">
       <svg
         aria-hidden="true"
-        class="w-5 h-5"
+        className="w-5 h-5"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -32,14 +32,14 @@ export const toastIcons = {
           clipRule="evenodd"
         ></path>
       </svg>
-      <span class="sr-only">Error icon</span>
+      <span className="sr-only">Error icon</span>
     </div>
   ),
   alert: (
-    <div class="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
+    <div className="inline-flex flex-shrink-0 justify-center items-center w-8 h-8 text-orange-500 bg-orange-100 rounded-lg dark:bg-orange-700 dark:text-orange-200">
       <svg
         aria-hidden="true"
-        class="w-5 h-5"
+        className="w-5 h-5"
         fill="currentColor"
         viewBox="0 0 20 20"
         xmlns="http://www.w3.org/2000/svg"
@@ -50,7 +50,7 @@ export const toastIcons = {
           clipRule="evenodd"
         ></path>
       </svg>
-      <span class="sr-only">Warning icon</span>
+      <span className="sr-only">Warning icon</span>
     </div>
   ),
 }

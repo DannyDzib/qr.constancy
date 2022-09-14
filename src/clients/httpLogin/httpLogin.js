@@ -6,6 +6,5 @@ export const handleLogin = async (data) => {
   const response = await safePromise(
     HttpClient.post(`${AppSettings.ENDPOINT_GET_ACCES_TOKEN}`, data)
     )
-    console.log("httpLogin", response)
-  return response
+  return response?.result?.data
 }

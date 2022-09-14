@@ -5,24 +5,15 @@ const ToastProvider = (props) => {
   const { children } = props
   const [toastState, setToastState] = useState(initialState)
 
-  const handleToast = (config, type) => {
+  const show = (config) => {
+   
     const toast = {
       id: _.uniqueId(),
-      type,
+      type: config.type,  //types "success", "alert", "error"
       text: config.text,
-      showClose: config.showClose,
+      showClose: config.showClose, // true, false
     }
     setToastState([...toastState, toast])
-  }
-
-  const success = {
-    show: (config) => handleToast(config, "success"),
-  }
-  const alert = {
-    show: (config) => handleToast(config, "alert"),
-  }
-  const error = {
-    show: (config) => handleToast(config, "error"),
   }
 
   const handleDeleteToast = useCallback(
@@ -36,20 +27,17 @@ const ToastProvider = (props) => {
   useEffect(() => {
     const timeOut = setTimeout(() => {
       if (toastState[0]) {
-        handleDeleteToast(toastState[0].id)
+        handleDeleteToast(toastState[toastState.length - 1].id)
       }
     }, 3500)
     return () => {
-      console.log(toastState)
       clearTimeout(timeOut)
     }
   }, [toastState, handleDeleteToast])
 
   const contextValue = useMemo(
     () => ({
-      success,
-      alert,
-      error,
+      show,
       toastState,
       handleDeleteToast,
     }),

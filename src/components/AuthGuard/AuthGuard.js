@@ -1,12 +1,11 @@
-import Layout from "components/Layout"
 import * as React from "react"
-import { useSelector } from "react-redux"
 import { Navigate, useLocation } from "react-router-dom"
+import { useAuth } from "hooks/useAuth"
+import Layout from "components/Layout"
 
 const AuthGuard = ({ component: Component }) => {
   const location = useLocation()
-  const { isAuth } = useSelector((state) => state.auth)
-
+  const { isAuth } = useAuth()
   return isAuth ? (
     <Layout>
       <Component />

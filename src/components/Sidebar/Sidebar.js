@@ -6,13 +6,56 @@ import TucanImage from "assets/images/tucan.png"
 import { Link } from "react-router-dom"
 import useSidebar from "./useSidebar"
 import { useIntl } from "react-intl"
+import { useModal } from "components/Modal"
+import { useAuth } from "hooks/useAuth"
 import "./styles.css"
+import { setLoading } from "redux/modules/common"
+import { useDispatch } from "react-redux"
 
 const Sidebar = () => {
   const { formatMessage: f } = useIntl()
   const [open, setOpen] = useState(true)
   const { sidebarItems } = useSidebar()
+  const { handleOpenModal, handleCloseModal } = useModal()
+  const { onLogout } = useAuth()
+  const dispatch = useDispatch()
+  const handleLogout = () => {
+    dispatch(setLoading(true))
+    handleCloseModal()
+    setTimeout(() => {
+      dispatch(setLoading(false))
+      onLogout()
+    }, 1500)
+  }
 
+  const handleModalLogout = () => {
+    handleOpenModal({
+      title: "¿Seguro desea salir?",
+      body: (
+        <div className="flex justify-around mt-4 w-[100%] text-xs">
+            <button
+            className="w-[90px] bg-white hover:bg-blue-900 text-blue-900 hover:text-white font-bold py-2 px-4 border border-blue-900 rounded"
+            onClick={handleCloseModal}
+          >
+            Cancelar
+          </button>
+          <button
+            className="w-[90px] bg-blue-900 hover:bg-white text-white font-semibold hover:text-blue-900 py-2 px-4 border border-blue-900  rounded"
+            onClick={handleLogout}
+          >
+            Aceptar
+          </button>
+        </div>
+      ),
+      configProps: {
+        showClose: false,
+        scroll: "body",
+        titleAlign: "center",
+        width: "xs",
+        showDividerHeader: false,
+      },
+    })
+  }
   const renderItem = (item, key) => (
     <div
       key={key}
@@ -119,7 +162,10 @@ const Sidebar = () => {
             open ? "justify-end" : "justify-center"
           }  mt-4 static bottom-5 right-5 lg:absolute lg:block `}
         >
-          <button className=" border-2 border-white rounded-full bg-white w-[35px] p-2 radius rotate-180">
+          <button
+            className=" border-2 border-white rounded-full bg-white w-[35px] p-2 radius rotate-180"
+            onClick={handleModalLogout}
+          >
             <img className="object-cover " alt="logout" src={LogoutImage} />
           </button>
         </li>

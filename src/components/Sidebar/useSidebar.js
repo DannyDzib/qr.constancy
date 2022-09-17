@@ -6,12 +6,10 @@ import TeacherIcon from "assets/icons/teacher.svg"
 import StudentIcon from "assets/icons/student.svg"
 import { useIntl } from "react-intl"
 import localstorage from "services/localstorage"
-import { useLocation } from "react-router-dom"
 import { paths } from "vars"
 const useSidebar = () => {
   const { isAdmin } = localstorage.get("data")
   const { formatMessage: f } = useIntl()
-  const { pathname } = useLocation()
 
   const sidebarAdmin = {
     title: f({ id: "SIDEBAR_ADMINISTRATOR_TITLE" }),
@@ -24,17 +22,14 @@ const useSidebar = () => {
           {
             title: f({ id: "SIDEBAR_ADMINISTRATOR_DASHBOARD_USERS" }),
             path: paths.admin.users,
-            isActive: paths?.admin?.users === pathname,
           },
           {
             title: f({ id: "SIDEBAR_ADMINISTRATOR_DASHBOARD_CAREERS" }),
-            path: "/",
-            isActive: false,
+            path: paths.admin.careers,
           },
           {
             title: f({ id: "SIDEBAR_ADMINISTRATOR_DASHBOARD_COURSES" }),
-            path: "/",
-            isActive: false,
+            path: paths.admin.courses,
           },
         ],
       },
@@ -50,17 +45,18 @@ const useSidebar = () => {
         {
           title: f({ id: "SIDEBAR_STUDENT_CURRENT_COURSES" }),
           icon: ListOrderIcon,
-          isActive: false,
+          path: paths.admin.courses,
         },
         {
           title: f({ id: "SIDEBAR_STUDENT_OPEN_COURSES" }),
-          isActive: false,
           icon: ListIcon,
+          path: '/',
+
         },
         {
           title: f({ id: "SIDEBAR_STUDENT_COMPLETED_COURSES" }),
-          isActive: false,
           icon: ListCheckIcon,
+          path: '/',
         },
       ],
     },
@@ -71,13 +67,14 @@ const useSidebar = () => {
       items: [
         {
           title: f({ id: "SIDEBAR_TEACHER_CURRENT_COURSES" }),
-          isActive: false,
           icon: ListOrderIcon,
+          path: '/',
+
         },
         {
           title: f({ id: "SIDEBAR_TEACHER_COMPLETED_COURSES" }),
-          isActive: false,
           icon: ListCheckIcon,
+          path: '/',
         },
       ],
     },

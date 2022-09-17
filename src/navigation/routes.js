@@ -1,5 +1,7 @@
-import Users from "screens/Dashboard/Users"
-import Home from "screens/Home"
+import Users from "screens/admin/users"
+import Careers from "screens/admin/careers"
+import Courses from "screens/admin/cuorses"
+import Home from "screens/dashboard/home"
 
 const routes = [
   {
@@ -11,6 +13,16 @@ const routes = [
     path: "/admin/users",
     name: "Usuarios",
     element: Users,
+  },
+  {
+    path: "/admin/careers",
+    name: "Carreras",
+    element: Careers,
+  },
+  {
+    path: "/admin/courses",
+    name: "Cursos",
+    element: Courses,
   },
 ]
 

@@ -60,5 +60,7 @@ export const toastIcons = {
 export const paths = {
   admin:{
     users: "/admin/users",
+    careers:"/admin/careers",
+    courses:"/admin/courses"
   }
 }

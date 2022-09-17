@@ -1,13 +1,11 @@
-const Users = () => {
+const Table = (props) => {
+  const { header, data } = props
   return (
-    <>
+    <div>
       <div className="flex justify-between items-center mb-4">
         <h1 className="text-2xl font-bold text-blue-900	">Usuarios</h1>
-        <label  className="sr-only">
-          Search
-        </label>
+        <label className="sr-only">Search</label>
         <div className="relative">
-          
           <input
             type="text"
             id="table-search-users"
@@ -60,7 +58,7 @@ const Users = () => {
             </tr>
           </thead>
           <tbody>
-            {new Array(10).fill("-").map((item, key) => (
+            {new Array(10).fill("*").map((item, key) => (
               <tr
                 className="bg-white border-b dark:bg-gray-900 dark:border-gray-700"
                 key={key}
@@ -78,7 +76,7 @@ const Users = () => {
                 <td className="py-4 px-6">Ing Sistemas Computacionales</td>
                 <td className="py-4 px-6">
                   <a
-                    href="#"
+                    href="/"
                     className="font-medium text-blue-600 dark:text-blue-500 hover:underline"
                   >
                     Edit
@@ -88,9 +86,11 @@ const Users = () => {
             ))}
           </tbody>
         </table>
+        
       </div>
-    </>
+      
+    </div>
   )
 }
 
-export default Users
+export default Table

@@ -16,3 +16,12 @@
     border-radius: 100vh;
     z-index: 0!important;
 }
+
+
+.active {
+  background-color: white;
+  padding: 8px 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  box-shadow: 0px 10px 15px -3px rgba(0,0,0,0.1);
+}

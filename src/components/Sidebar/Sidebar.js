@@ -3,7 +3,7 @@ import ControlIcon from "assets/icons/control.png"
 import UserIcon from "assets/images/avatar.jpg"
 import LogoutImage from "assets/icons/logout.svg"
 import TucanImage from "assets/images/tucan.png"
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import useSidebar from "./useSidebar"
 import { useIntl } from "react-intl"
 import { useModal } from "components/Modal"
@@ -34,7 +34,7 @@ const Sidebar = () => {
       title: "¿Seguro desea salir?",
       body: (
         <div className="flex justify-around mt-4 w-[100%] text-xs">
-            <button
+          <button
             className="w-[90px] bg-white hover:bg-blue-900 text-blue-900 hover:text-white font-bold py-2 px-4 border border-blue-900 rounded"
             onClick={handleCloseModal}
           >
@@ -62,24 +62,28 @@ const Sidebar = () => {
       key={key}
       className={`${!open && "hidden"} ${
         key === 0 ? "mt-1 " : "mt-3"
-      } origin-left  duration-200 items-start text-sm font-semibold italic flex`}
+      } origin-left  duration-200 items-start text-sm font-semibold italic flex  w-[100%]` }
     >
-      <img className=" w-[15px]" alt="user" src={item.icon} />
-      <div className="mx-4 italic">
+      <div className="italic w-[100%]">
         {item?.subItems ? (
-          <p>{item.title}</p>
+          <p className="flex">
+            <img className="mr-4 w-[15px]" alt="user" src={item.icon} />
+            {item.title}
+          </p>
         ) : (
-          <Link to="/">{item.title}</Link>
+          <NavLink className='flex ' to={item.path}>
+            <img className="mr-4 w-[15px]" alt="user" src={item.icon} />
+            {item.title}</NavLink>
         )}
         {item?.subItems &&
           item?.subItems?.map((subItem, i) => (
-            <Link
+            <NavLink
               key={i}
               to={subItem.path}
-              className={`mt-1 ml-4 font-light italic block`}
+              className={`mt-1 pl-4 font-light italic block`}
             >
               {subItem.title}
-            </Link>
+            </NavLink>
           ))}
       </div>
     </div>
